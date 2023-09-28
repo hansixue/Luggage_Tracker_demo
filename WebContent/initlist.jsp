@@ -11,5 +11,9 @@
 number : <input type="text" name="number">
 <input type="submit" value="Submit">
 </form>
+<br>
+<form action="listall.jsp">
+<input type="submit" value="listall">
+</form>
 </body>
 </html>
