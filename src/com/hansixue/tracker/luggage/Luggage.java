@@ -4,7 +4,15 @@ import java.util.Date;
 
 public class Luggage {
 
-    private int id;
+    @Override
+	public String toString() {
+		return "Luggage [id=" + id + ", tagNumber=" + tagNumber + ", amount=" + amount + ", keptTime=" + keptTime
+				+ ", keptStuffId=" + keptStuffId + ", pickupTime=" + pickupTime + ", pickedUpTime=" + pickedUpTime
+				+ ", passedByStuffId=" + passedByStuffId + "]";
+	}
+
+
+	private int id;
     private int tagNumber;
     private int amount;
     private Date keptTime;

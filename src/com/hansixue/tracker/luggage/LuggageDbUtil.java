@@ -1,7 +1,8 @@
 package com.hansixue.tracker.luggage;
 
-import java.sql.Connection;
 
+
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,15 +10,15 @@ import java.util.List;
 
 import javax.sql.DataSource;
 import java.util.Date;
-public class luggageDbUtil {
+public class LuggageDbUtil {
 
 	private DataSource dataSource;
 
-	public luggageDbUtil(DataSource theDataSource) {
+	public LuggageDbUtil(DataSource theDataSource) {
 		dataSource = theDataSource;
 	}
 	
-    public List<Luggage> getluggages(String sql) throws Exception {
+    public List<Luggage> getLuggages(String sql) throws Exception {
 
         List<Luggage> luggages = new ArrayList<>();
         //#1 init conn stmt rs
@@ -38,10 +39,10 @@ public class luggageDbUtil {
 				
 			    // retrieve data from result set row
 			    int id = myRs.getInt("id");
-			    int tagNumber = myRs.getInt("tagNumber");
+			    int tagNumber = myRs.getInt("tag_number");
 			    int amount = myRs.getInt("amount");
-			    Date keptTime = myRs.getDate("keptTime");
-			    int keptStuffId = myRs.getInt("keptStuffId");
+			    Date keptTime = myRs.getDate("kept_time");
+			    int keptStuffId = myRs.getInt("kept_stuff_id");
 				
 			    // create new student object
 			    Luggage tempLuggage = new Luggage(id, tagNumber, amount,keptTime,keptStuffId);

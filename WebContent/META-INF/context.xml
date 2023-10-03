@@ -5,6 +5,6 @@
                maxActive="20" maxIdle="5" maxWait="10000"
                username="luggage" password="luggagepass" 
                driverClassName="com.mysql.cj.jdbc.Driver"
-               url="jdbc:mysql://localhost:49153/luggage_tracker_demo"/>
+               url="jdbc:mysql://localhost:49154/luggage_tracker_demo"/>
 
 </Context>
