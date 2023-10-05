@@ -14,6 +14,25 @@ language="java" contentType="text/html; charset=UTF-8"
 					(List<Luggage>) request.getAttribute("LUGGAGE_LIST");
 %>
 <body>
- <%= theLuggages %>
+	<table>
+			
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+				</tr>
+				
+				<% for (Luggage tempLuggage : theLuggages) { %>
+				
+					<tr>
+						<td> <%= tempLuggage.getTagNumber() %> </td>
+						<td> <%= tempLuggage.getKeptTime() %> </td>
+						<td> <%= tempLuggage.getKeptStuffId() %> </td>
+					</tr>
+				
+				<% } %>
+				
+			</table>
+
 </body>
 </html>
