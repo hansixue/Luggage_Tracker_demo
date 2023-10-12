@@ -33,6 +33,7 @@
 				
 				</c:forEach>
 				<form action="LuggageControllerServlet" method="get">
+					<input type="hidden" name="command" value="ADD">
 					<tr>
 						<td> <input type="text" name="tagNumber" /> </td>
 						<td> <input type="text" name="amount" /> </td>

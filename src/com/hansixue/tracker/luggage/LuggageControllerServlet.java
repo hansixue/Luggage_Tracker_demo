@@ -1,6 +1,7 @@
 package com.hansixue.tracker.luggage;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -40,14 +41,60 @@ public class LuggageControllerServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			// read the "command" parameter
+			String theCommand = request.getParameter("command");
+			
+			// if the command is missing, then default to listing students
+			if (theCommand == null) {
+				theCommand = "LIST";
+			}
+			
+			// route to the appropriate method
+			switch (theCommand) {
+			
+			case "LIST":
 				listLuggages(request, response);
+				break;
+				
+			case "ADD":
+				addLuggage(request, response);
+				break;
+		/*		
+			case "LOAD":
+				loadLuggage(request, response);
+				break;
+				
+			case "UPDATE":
+				updateLuggage(request, response);
+				break;
+			
+			case "DELETE":
+				deleteLuggage(request, response);
+				break;
+		*/		
+			default:
+				listLuggages(request, response);
+			}
+				
 		}
 		catch (Exception exc) {
 			throw new ServletException(exc);
 		}
 		
-
 	}
+
+	private void addLuggage(HttpServletRequest request, HttpServletResponse response) {
+		
+		int tagNumber = Integer.parseInt(request.getParameter("tagNumber"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
+		Date keptTime = new Date(request.getDateHeader("keptTime"));
+		int keptStuffId = Integer.parseInt(request.getParameter("keptStuffId"));
+		
+		Luggage theLuggage = new Luggage(tagNumber,amount,keptTime,keptStuffId);
+		System.out.println(theLuggage.toString());
+		
+	}
+
 
 	private void listLuggages(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// get students from db util
