@@ -2,6 +2,7 @@ package com.hansixue.tracker.luggage;
 
 import java.io.IOException;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -83,16 +84,22 @@ public class LuggageControllerServlet extends HttpServlet {
 		
 	}
 
-	private void addLuggage(HttpServletRequest request, HttpServletResponse response) {
-		
+	private void addLuggage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// get data
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		int tagNumber = Integer.parseInt(request.getParameter("tagNumber"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
-		Date keptTime = new Date(request.getDateHeader("keptTime"));
+		System.out.println("kepttime on page = "+ request.getParameter("keptTime"));
+		Date keptTime = dateFormat.parse(request.getParameter("keptTime"));
+		System.out.println("the Date is " + keptTime.toString());
 		int keptStuffId = Integer.parseInt(request.getParameter("keptStuffId"));
-		
+		// create a luggage
 		Luggage theLuggage = new Luggage(tagNumber,amount,keptTime,keptStuffId);
-		System.out.println(theLuggage.toString());
-		
+		//System.out.println(theLuggage.toString());
+		//add the luggage to database
+		luggageDbutil.addLuggage(theLuggage);
+		//list all luggage
+		listLuggages(request, response);
 	}
 
 

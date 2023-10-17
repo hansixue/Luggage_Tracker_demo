@@ -3,8 +3,10 @@ package com.hansixue.tracker.luggage;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +78,41 @@ public class LuggageDbUtil {
 		catch (Exception exc) {
 			exc.printStackTrace();
 		}
+	}
+
+	public void addLuggage(Luggage theLuggage) {
+		//init myconn and mystmt
+		Connection myconn = null;
+		PreparedStatement mystmt = null;
+		
+		try{
+			/*
+			 *  1. get a connection
+	      		2. create sql statement
+	      		3. execute query
+	      		4. process result set*/	
+			myconn = dataSource.getConnection();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sql = "insert into guest_luggage"	
+					+ "(id,tag_number,amount,kept_time,kept_stuff_id) "
+					+ "values(null,?,?,?,?)";
+			
+			
+			mystmt = myconn.prepareStatement(sql);
+			mystmt.setInt(1, theLuggage.getTagNumber());
+			mystmt.setInt(2, theLuggage.getAmount());
+			System.out.println(theLuggage.getKeptTime().toString());
+			mystmt.setString(3, dateFormat.format(theLuggage.getKeptTime()));
+			mystmt.setInt(4, theLuggage.getKeptStuffId());
+			
+			mystmt.execute();
+		}catch (Exception exc) {
+			exc.printStackTrace();
+		}finally{
+			//finally close
+			close(myconn,mystmt,null);
+		}
+		
 	}
 
 }

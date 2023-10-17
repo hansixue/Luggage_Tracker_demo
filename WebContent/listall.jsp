@@ -37,7 +37,7 @@
 					<tr>
 						<td> <input type="text" name="tagNumber" /> </td>
 						<td> <input type="text" name="amount" /> </td>
-						<td> <input type="date" name="keptTime" /> </td>
+						<td> <input type="datetime-local" name="keptTime" /> </td>
 						<td> <input type="text" name="keptStuffId" /></td>	
 						<td> <input type="submit" value="submit"  /> </td>
 					</tr>
