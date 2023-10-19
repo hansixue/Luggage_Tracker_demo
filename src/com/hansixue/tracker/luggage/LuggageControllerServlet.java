@@ -47,6 +47,7 @@ public class LuggageControllerServlet extends HttpServlet {
 			
 			// if the command is missing, then default to listing students
 			if (theCommand == null) {
+				System.out.println("Command is null!");
 				theCommand = "LIST";
 			}
 			
@@ -74,6 +75,7 @@ public class LuggageControllerServlet extends HttpServlet {
 				break;
 		*/		
 			default:
+				System.out.println("defualt command running!");
 				listLuggages(request, response);
 			}
 				
