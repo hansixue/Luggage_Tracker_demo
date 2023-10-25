@@ -61,6 +61,12 @@ public class LuggageControllerServlet extends HttpServlet {
 			case "ADD":
 				addLuggage(request, response);
 				break;
+			case "PICKUP":
+				pickupLuggage(request, response);
+				break;
+			case "LIST50":
+				list50(request, response);
+				break;
 		/*		
 			case "LOAD":
 				loadLuggage(request, response);
@@ -85,6 +91,36 @@ public class LuggageControllerServlet extends HttpServlet {
 		}
 		
 	}
+
+	private void pickupLuggage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// get data from page
+		System.out.println("On Going 1");
+		int theId = Integer.parseInt(request.getParameter("id"));
+		// get the data from mysql
+		System.out.println("On Going 2");
+		Luggage theLuggage = luggageDbutil.getLuggageByid(theId);
+		// check if is picked up
+		//System.out.println(theLuggage.getPickupTime().toString());
+		if(theLuggage.getPickedUpTime()==null) {
+			System.out.println("On Going 3");
+			System.out.println(theLuggage.toString());
+			// change the data
+			//theLuggage.setPickedUpTime(new Date(System.currentTimeMillis()));
+			//theLuggage.setPassedByStuffId(Integer.parseInt(request.getParameter("stuffId")));
+			// give it back to database
+			luggageDbutil.setLuggagePickedupTime(theId,new Date(System.currentTimeMillis()));
+			luggageDbutil.setLuggagePickedupStuff(theId,Integer.parseInt(request.getParameter("stuffId")));
+			listLuggages(request, response);
+		}else {
+			//go to error page.  like
+			//this luggage has picked up, use edit if you want to change it
+			System.out.println("On Going 4");
+			listLuggages(request, response);
+		}
+
+	}
+
+
 
 	private void addLuggage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// get data
@@ -117,7 +153,18 @@ public class LuggageControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 		
 	}
-
+	private void list50(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// get students from db util
+		List<Luggage> luggages = luggageDbutil.getLuggages("select * from guest_luggage;");
+		
+		// add students to the request
+		request.setAttribute("LUGGAGE_LIST", luggages);
+				
+		// send to JSP page (view)
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/list50.jsp");
+		dispatcher.forward(request, response);
+		
+	}
 
 
 }

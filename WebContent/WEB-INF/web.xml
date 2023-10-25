@@ -17,16 +17,6 @@
     <servlet-name>TestServlet</servlet-name>
     <servlet-class>com.hansixue.tracker.luggage.TestServlet</servlet-class>
   </servlet>
-  <!--
-  <servlet-mapping>
-    <servlet-name>LuggageControllerServlet</servlet-name>
-    <url-pattern>/LuggageControllerServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>TestServlet</servlet-name>
-    <url-pattern>/TestServlet</url-pattern>
-  </servlet-mapping>
-   -->
   <resource-ref>
     <res-ref-name>jdbc/luggage_tracker_demo</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
@@ -37,7 +27,15 @@
       <injection-target-name>luggage_tracker_demo</injection-target-name>
     </injection-target>
   </resource-ref>
-  <listener>
-    <listener-class>com.hansixue.tracker.luggage.MyServletContextListener</listener-class>
-  </listener>
+  <servlet>
+    <description></description>
+    <display-name>IndexRedirectServlet</display-name>
+    <servlet-name>IndexRedirectServlet</servlet-name>
+    <servlet-class>com.hansixue.tracker.luggage.IndexRedirectServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndexRedirectServlet</servlet-name>
+    <url-pattern>/IndexRedirectServlet</url-pattern>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
 </web-app>

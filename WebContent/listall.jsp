@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,9 @@
 					<th>amount</th>
 					<th>keptTime</th>
 					<th>keptStuffId</th>
-					<th>Func</th>
+					<th>TEMP</th>
+					<th>pickedup</th>
+					<th>func</th>
 				</tr>
 				
 				<c:forEach var="tempLuggage" items="${LUGGAGE_LIST}">
@@ -28,7 +31,17 @@
 						<td> ${tempLuggage.amount} </td>
 						<td> ${tempLuggage.keptTime} </td>
 						<td> ${tempLuggage.keptStuffId} </td>
-						<td></td>
+						<td> ${tempLuggage.pickedUpTime} </td>
+						<c:if test = "${empty tempLuggage.pickedUpTime}">
+							<td> <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value = "${tempLuggage.pickedUpTime}" /></td>
+							<td><form action="LuggageControllerServlet" method="get">
+								<input type="hidden" name="command" value="PICKUP">
+								<input type="hidden" name="id" value="${tempLuggage.id}">
+								<input type="text" name="stuffId"/>
+								<input type="submit" value="pickup"  /> 
+								</form>
+							</td>
+						</c:if>
 					</tr>
 				
 				</c:forEach>
