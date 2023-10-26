@@ -39,6 +39,11 @@ public class Luggage {
 		this.keptTime = keptTime;
 		this.keptStuffId = keptStuffId;
 	}
+	public Luggage(int tagNumber) {
+		super();
+		this.tagNumber = tagNumber;
+	}
+
 
 
 	public int getId() {

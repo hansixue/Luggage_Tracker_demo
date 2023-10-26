@@ -1,6 +1,7 @@
 package com.hansixue.tracker.luggage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -60,6 +61,9 @@ public class LuggageControllerServlet extends HttpServlet {
 				
 			case "ADD":
 				addLuggage(request, response);
+				break;
+			case "ADD50":
+				addLuggage50(request, response);
 				break;
 			case "PICKUP":
 				pickupLuggage(request, response);
@@ -139,6 +143,25 @@ public class LuggageControllerServlet extends HttpServlet {
 		//list all luggage
 		listLuggages(request, response);
 	}
+	private void addLuggage50(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// get data
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		int tagNumber = Integer.parseInt(request.getParameter("tagNumber"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
+		System.out.println("kepttime on page = "+ request.getParameter("keptTime"));
+		Date keptTime = dateFormat.parse(request.getParameter("keptTime"));
+		System.out.println("the Date is " + keptTime.toString());
+		int keptStuffId = Integer.parseInt(request.getParameter("keptStuffId"));
+		// create a luggage
+		Luggage theLuggage = new Luggage(tagNumber,amount,keptTime,keptStuffId);
+		//System.out.println(theLuggage.toString());
+		//add the luggage to database
+		luggageDbutil.addLuggage(theLuggage);
+		int startNumber = Integer.parseInt(request.getParameter("startNumber"));
+		request.setAttribute("START_NUMBER", startNumber);
+		//list all luggage
+		list50(request, response);
+	}
 
 
 	private void listLuggages(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -155,13 +178,25 @@ public class LuggageControllerServlet extends HttpServlet {
 	}
 	private void list50(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// get students from db util
-		List<Luggage> luggages = luggageDbutil.getLuggages("select * from guest_luggage;");
-		
+		//System.out.println("LIST50");
+		List<Luggage> luggages = new ArrayList<>();
+		int startNumber = Integer.parseInt(request.getParameter("startNumber"));
+		for(int i=startNumber;i<startNumber+50;i++) {
+			List<Luggage> templuggages = luggageDbutil.getLuggages("select * from guest_luggage where tag_number = "+i+";");
+			if(templuggages.isEmpty()) {
+				//System.out.println("empluggages==null");
+				luggages.add(new Luggage(i));
+			}else{
+				System.out.println("add "+i);
+				luggages.addAll(templuggages); 
+			}
+		}
+		//for(Luggage i :luggages)System.out.println(i.toString());
 		// add students to the request
 		request.setAttribute("LUGGAGE_LIST", luggages);
-				
+		request.setAttribute("START_NUMBER", startNumber);
 		// send to JSP page (view)
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/list50.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/listall.jsp");
 		dispatcher.forward(request, response);
 		
 	}

@@ -19,33 +19,46 @@
 					<th>amount</th>
 					<th>keptTime</th>
 					<th>keptStuffId</th>
-					<th>TEMP</th>
 					<th>pickedup</th>
 					<th>func</th>
 				</tr>
-				
-				<c:forEach var="tempLuggage" items="${LUGGAGE_LIST}">
-				
+
+		<c:forEach var="tempLuggage" items="${LUGGAGE_LIST}">
+			<c:choose>
+				<c:when test="${tempLuggage.id == 0}">
+					<form action="LuggageControllerServlet" method="get">
+						<input type="hidden" name="command" value="ADD50">
+						<input type="hidden" value="${tempLuggage.tagNumber}" name="tagNumber" />
+						<input type="hidden" value="${START_NUMBER}" name="startNumber">
 					<tr>
-						<td> ${tempLuggage.tagNumber} </td>
-						<td> ${tempLuggage.amount} </td>
-						<td> ${tempLuggage.keptTime} </td>
-						<td> ${tempLuggage.keptStuffId} </td>
-						<td> ${tempLuggage.pickedUpTime} </td>
-						<c:if test = "${empty tempLuggage.pickedUpTime}">
-							<td> <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value = "${tempLuggage.pickedUpTime}" /></td>
+						<td>${tempLuggage.tagNumber}</td>
+						<td><input type="text" name="amount" /></td>
+						<td><input type="datetime-local" name="keptTime" /></td>
+						<td><input type="text" name="keptStuffId" /></td>
+						<td><input type="submit" value="submit" /></td>
+					</tr>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td>${tempLuggage.tagNumber}</td>
+						<td>${tempLuggage.amount}</td>
+						<td>${tempLuggage.keptTime}</td>
+						<td>${tempLuggage.keptStuffId}</td>
+						<c:if test="${empty tempLuggage.pickedUpTime}">
+							<td>${tempLuggage.pickedUpTime}</td>
 							<td><form action="LuggageControllerServlet" method="get">
-								<input type="hidden" name="command" value="PICKUP">
-								<input type="hidden" name="id" value="${tempLuggage.id}">
-								<input type="text" name="stuffId"/>
-								<input type="submit" value="pickup"  /> 
-								</form>
-							</td>
+									<input type="hidden" name="command" value="PICKUP"> <input
+										type="hidden" name="id" value="${tempLuggage.id}"> <input
+										type="text" name="stuffId" /> <input type="submit"
+										value="pickup" />
+								</form></td>
 						</c:if>
 					</tr>
-				
-				</c:forEach>
-				<form action="LuggageControllerServlet" method="get">
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<form action="LuggageControllerServlet" method="get">
 					<input type="hidden" name="command" value="ADD">
 					<tr>
 						<td> <input type="text" name="tagNumber" /> </td>
