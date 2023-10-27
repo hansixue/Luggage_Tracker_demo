@@ -57,8 +57,7 @@ public class LuggageControllerServlet extends HttpServlet {
 			
 			case "LIST":
 				listLuggages(request, response);
-				break;
-				
+				break;	
 			case "ADD":
 				addLuggage(request, response);
 				break;
@@ -70,6 +69,9 @@ public class LuggageControllerServlet extends HttpServlet {
 				break;
 			case "LIST50":
 				list50(request, response);
+				break;
+			case "EDIT":
+				edit(request, response);
 				break;
 		/*		
 			case "LOAD":
@@ -95,6 +97,16 @@ public class LuggageControllerServlet extends HttpServlet {
 		}
 		
 	}
+
+	private void edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int theId = Integer.parseInt(request.getParameter("id"));
+		Luggage theLuggage = luggageDbutil.getLuggageByid(theId);
+		request.setAttribute("LUGGAGE", theLuggage);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/edit.jsp");
+		dispatcher.forward(request, response);
+	}
+
+
 
 	private void pickupLuggage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// get data from page
@@ -198,7 +210,6 @@ public class LuggageControllerServlet extends HttpServlet {
 		// send to JSP page (view)
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/listall.jsp");
 		dispatcher.forward(request, response);
-		
 	}
 
 
