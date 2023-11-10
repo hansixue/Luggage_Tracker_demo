@@ -9,6 +9,18 @@
 </head>
 <body>
 <c:set var="tempLuggage" value="${LUGGAGE}"/>
-<c:out value="${LUGGAGE}"/>
+ <table>
+  <tr>
+    <td>Column</td>
+    <td>Old</td>
+    <td>New</td>
+    <td>Func</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table> 
 </body>
 </html>
