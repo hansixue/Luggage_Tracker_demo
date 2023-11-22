@@ -144,11 +144,12 @@ public class LuggageControllerServlet extends HttpServlet {
 		int tagNumber = Integer.parseInt(request.getParameter("tagNumber"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		System.out.println("kepttime on page = "+ request.getParameter("keptTime"));
+		int keptPlace = Integer.parseInt(request.getParameter("keptPlace"));
 		Date keptTime = dateFormat.parse(request.getParameter("keptTime"));
 		System.out.println("the Date is " + keptTime.toString());
 		int keptStuffId = Integer.parseInt(request.getParameter("keptStuffId"));
 		// create a luggage
-		Luggage theLuggage = new Luggage(tagNumber,amount,keptTime,keptStuffId);
+		Luggage theLuggage = new Luggage(tagNumber,amount,keptPlace,keptTime,keptStuffId);
 		//System.out.println(theLuggage.toString());
 		//add the luggage to database
 		luggageDbutil.addLuggage(theLuggage);
@@ -161,11 +162,12 @@ public class LuggageControllerServlet extends HttpServlet {
 		int tagNumber = Integer.parseInt(request.getParameter("tagNumber"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		System.out.println("kepttime on page = "+ request.getParameter("keptTime"));
+		int keptPlace = Integer.parseInt(request.getParameter("keptPlace"));
 		Date keptTime = dateFormat.parse(request.getParameter("keptTime"));
 		System.out.println("the Date is " + keptTime.toString());
 		int keptStuffId = Integer.parseInt(request.getParameter("keptStuffId"));
 		// create a luggage
-		Luggage theLuggage = new Luggage(tagNumber,amount,keptTime,keptStuffId);
+		Luggage theLuggage = new Luggage(tagNumber,amount,keptPlace,keptTime,keptStuffId);
 		//System.out.println(theLuggage.toString());
 		//add the luggage to database
 		luggageDbutil.addLuggage(theLuggage);

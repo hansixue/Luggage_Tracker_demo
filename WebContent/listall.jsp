@@ -17,6 +17,7 @@
 				<tr>
 					<th>tagNumber</th>
 					<th>amount</th>
+					<th>keptPlace<th>
 					<th>keptTime</th>
 					<th>keptStuffId</th>
 					<th>pickedup</th>
@@ -34,6 +35,14 @@
 					<tr>
 						<td>${tempLuggage.tagNumber}</td>
 						<td><input type="text" name="amount" /></td>
+						<td>
+						 <select name="keptPlace" >
+						    <option value="A1">A1</option>
+						    <option value="A2">A2</option>
+						    <option value="A3">A3</option>
+						    <option value="L">L</option>
+						  </select>
+						</td>
 						<td><input type="datetime-local" name="keptTime" /></td>
 						<td><input type="text" name="keptStuffId" /></td>
 						<td><input type="submit" value="submit" /></td>
@@ -44,6 +53,7 @@
 					<tr>
 						<td>${tempLuggage.tagNumber}</td>
 						<td>${tempLuggage.amount}</td>
+						<td>${tempLuggage.keptPlace}</td>
 						<td>${tempLuggage.keptTime}</td>
 						<td>${tempLuggage.keptStuffId}</td>
 						<c:choose>
@@ -75,6 +85,12 @@
 					<tr>
 						<td> <input type="text" name="tagNumber" /> </td>
 						<td> <input type="text" name="amount" /> </td>
+						<td><select name="keptPlace" >
+						    <option value="A1">A1</option>
+						    <option value="A2">A2</option>
+						    <option value="A3">A3</option>
+						    <option value="L">L</option>
+						</select></td>
 						<td> <input type="datetime-local" name="keptTime" /> </td>
 						<td> <input type="text" name="keptStuffId" /></td>	
 						<td> <input type="submit" value="submit"  /> </td>

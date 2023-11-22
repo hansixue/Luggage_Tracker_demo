@@ -11,7 +11,7 @@
 <c:set var="tempLuggage" value="${LUGGAGE}"/>
  <table>
   <tr>
-    <td>Column</td>
+    <td>Columnd>
     <td>Old</td>
     <td>New</td>
     <td>Func</td>

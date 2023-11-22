@@ -4,35 +4,29 @@ import java.util.Date;
 
 public class Luggage {
 
-    @Override
-	public String toString() {
-		return "Luggage [id=" + id + ", tagNumber=" + tagNumber + ", amount=" + amount + ", keptTime=" + keptTime
-				+ ", keptStuffId=" + keptStuffId + ", pickupTime=" + pickupTime + ", pickedUpTime=" + pickedUpTime
-				+ ", passedByStuffId=" + passedByStuffId + "]";
-	}
-
-
 	private int id;
     private int tagNumber;
     private int amount;
-    private Date keptTime;
+    private int keptPlace;
+	private Date keptTime;
     private int keptStuffId;
     private Date pickupTime;
     private Date pickedUpTime;
     private int passedByStuffId;
     
     
-	public Luggage(int id, int tagNumber, int amount, Date keptTime, int keptStuffId) {
+	public Luggage(int id, int tagNumber, int amount,int keptPlace, Date keptTime, int keptStuffId) {
 		super();
 		this.id = id;
 		this.tagNumber = tagNumber;
 		this.amount = amount;
+		this.keptPlace= keptPlace;
 		this.keptTime = keptTime;
 		this.keptStuffId = keptStuffId;
 	}
 
 
-	public Luggage(int tagNumber, int amount, Date keptTime, int keptStuffId) {
+	public Luggage(int tagNumber, int amount,int kept_place, Date keptTime, int keptStuffId) {
 		super();
 		this.tagNumber = tagNumber;
 		this.amount = amount;
@@ -73,6 +67,15 @@ public class Luggage {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+    public int getkeptPlace() {
+		return keptPlace;
+	}
+
+
+	public void setkeptPlace(int keptPlace) {
+		this.keptPlace = keptPlace;
 	}
 
 
@@ -123,6 +126,15 @@ public class Luggage {
 
 	public void setPassedByStuffId(int passedByStuffId) {
 		this.passedByStuffId = passedByStuffId;
+	}
+
+
+	
+	@Override
+	public String toString() {
+		return "Luggage [id=" + id + ", tagNumber=" + tagNumber + ", amount=" + amount + ", keptPlace=" + keptPlace
+				+ ", keptTime=" + keptTime + ", keptStuffId=" + keptStuffId + ", pickupTime=" + pickupTime
+				+ ", pickedUpTime=" + pickedUpTime + ", passedByStuffId=" + passedByStuffId + "]";
 	}
 
 
